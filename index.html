@@ -2,152 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Simon G - Life's Chapters</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
+    :root{
+      --circle-size: min(600px, 90vw);
+      --radius: calc(var(--circle-size) / 2);
+      --dot-size: clamp(68px, 14vw, 120px);
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       margin: 0;
       color: #222;
       text-align: center;
       background: #fff;
     }
+
     /* Top header bar */
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 2rem;
+      padding: 0.75rem 1rem;
       border-bottom: 1px solid #eee;
       background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
-    .topbar-left,
-    .topbar-right {
+    .topbar-left, .topbar-right {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: .75rem;
     }
-    .topbar img.logo {
-      max-height: 80px;
-    }
-    .icon {
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
+    .topbar img.logo { max-height: 64px; height: auto; }
+    .icon { font-size: 1.2rem; cursor: pointer; }
+
     header {
-      padding: 2rem 1rem 1rem 1rem;
-      background: rgba(255, 255, 255, 0.8);
+      padding: 1.5rem 1rem .75rem 1rem;
+      background: rgba(255,255,255,.85);
       backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
     header h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      margin: 0 0 .5rem 0;
       font-weight: 500;
       letter-spacing: 0.1em;
     }
     header p {
-      font-size: 1rem;
+      font-size: clamp(.9rem, 3.5vw, 1rem);
       color: #555;
       letter-spacing: 0.05em;
+      margin: 0 auto;
+      max-width: 42rem;
+      padding: 0 1rem;
     }
-    /* Background section only below header */
+
+    /* Background only below header (no fixed attachment for iOS) */
     .background-section {
-      background: url('bg.png') no-repeat center center fixed;
-      background-size: cover;
       position: relative;
-      padding: 4rem 0;
+      padding: 2.5rem 0;
+      background: url('bg.png') no-repeat center center / cover;
     }
     .background-section::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      content: ""; position: absolute; inset: 0;
       background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
       z-index: 0;
     }
+
     .timeline {
-      position: relative;
-      width: 100%;
-      height: 700px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      position: relative; width: 100%;
+      min-height: calc(var(--circle-size) + 2rem);
+      display: flex; justify-content: center; align-items: center;
       z-index: 1;
     }
+
     .circle {
       position: relative;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      border: 2px solid #ccc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(6px);
+      width: var(--circle-size); height: var(--circle-size);
+      border-radius: 50%; border: 2px solid #ccc;
+      display: flex; justify-content: center; align-items: center;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      margin: 0 auto;
     }
+
     .circle h2 {
-      position: absolute;
-      text-align: center;
-      width: 200px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1.1rem;
-      color: #444;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      position: absolute; text-align: center; width: 70%;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-size: clamp(.95rem, 3.5vw, 1.1rem);
+      color: #444; font-weight: 500; letter-spacing: 0.08em; line-height: 1.3;
     }
+
+    /* Make the whole dot a link for better tap targets */
     .milestone {
-      text-decoration: none;
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      overflow: hidden;
-      background: #fff;
+      position: absolute; width: var(--dot-size); height: var(--dot-size);
+      border-radius: 50%; background: #fff;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; color: inherit;
+      transition: transform .22s ease, box-shadow .22s ease;
+      -webkit-tap-highlight-color: transparent;
     }
-    .milestone:hover {
-      transform: scale(1.2);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      text-decoration: none;
+    .milestone span { font-weight: 500; font-size: clamp(.7rem, 2.8vw, .85rem); letter-spacing: .05em; padding: .25rem .4rem; line-height: 1.2; }
+
+    /* Desktop hover only where supported */
+    @media (hover: hover) and (pointer: fine) {
+      .milestone:hover { transform: scale(1.12); box-shadow: 0 10px 20px rgba(0,0,0,0.22); }
     }
-    .milestone span {
-      color: #222;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.8rem;
-      text-align: center;
-      padding: 0.5rem;
-      letter-spacing: 0.05em;
+    /* Keyboard focus */
+    .milestone:focus-visible { outline: none; transform: scale(1.12); box-shadow: 0 10px 20px rgba(0,0,0,0.22); }
+    /* Touch fallback: class toggled by JS */
+    .milestone.touch-hover { transform: scale(1.08); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+
+    /* Circle positions */
+    .m0   { transform: rotate(0deg)   translate(var(--radius)) rotate(0deg); }
+    .m30  { transform: rotate(30deg)  translate(var(--radius)) rotate(-30deg); }
+    .m60  { transform: rotate(60deg)  translate(var(--radius)) rotate(-60deg); }
+    .m90  { transform: rotate(90deg)  translate(var(--radius)) rotate(-90deg); }
+    .m120 { transform: rotate(120deg) translate(var(--radius)) rotate(-120deg); }
+    .m150 { transform: rotate(150deg) translate(var(--radius)) rotate(-150deg); }
+    .m180 { transform: rotate(180deg) translate(var(--radius)) rotate(-180deg); }
+    .m210 { transform: rotate(210deg) translate(var(--radius)) rotate(-210deg); }
+    .m240 { transform: rotate(240deg) translate(var(--radius)) rotate(-240deg); }
+    .m270 { transform: rotate(270deg) translate(var(--radius)) rotate(-270deg); }
+    .m300 { transform: rotate(300deg) translate(var(--radius)) rotate(-300deg); }
+    .m330 { transform: rotate(330deg) translate(var(--radius)) rotate(-330deg); }
+
+    /* Motion safety */
+    @media (prefers-reduced-motion: reduce) {
+      .milestone { transition: none; }
     }
+
+    /* Mobile tweaks */
+    @media (max-width: 768px) { .topbar { padding: .6rem .8rem; } .topbar img.logo { max-height: 52px; } .background-section { padding: 1.5rem 0; } }
+    @media (max-width: 480px) { .topbar img.logo { max-height: 44px; } :root{ --dot-size: clamp(60px, 18vw, 90px); } }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-  <!-- Topbar with logo and icons -->
   <div class="topbar">
     <div class="topbar-left">
       <span>USD$ ▾</span>
-      <i class="fas fa-search icon"></i>
+      <i class="fas fa-search icon" aria-hidden="true"></i>
     </div>
     <img src="simonglogo.png" alt="Simon G Logo" class="logo" />
     <div class="topbar-right">
-      <i class="far fa-heart icon"></i>
-      <i class="far fa-user icon"></i>
-      <i class="fas fa-shopping-bag icon"></i>
+      <i class="far fa-heart icon" aria-hidden="true"></i>
+      <i class="far fa-user icon" aria-hidden="true"></i>
+      <i class="fas fa-shopping-bag icon" aria-hidden="true"></i>
     </div>
   </div>
 
@@ -160,25 +168,35 @@
     <div class="timeline">
       <div class="circle">
         <h2>Select Your Milestone</h2>
-        <!-- Milestones evenly spaced using inline transform rotation -->
-        <div class="milestone" style="transform: rotate(0deg) translate(300px) rotate(0deg);"><span>Sobriety</span></div>
-        <div class="milestone" style="transform: rotate(30deg) translate(300px) rotate(-30deg);"><span>Passing Exams</span></div>
-        <div class="milestone" style="transform: rotate(60deg) translate(300px) rotate(-60deg);"><span>Golden Birthday</span></div>
-        <div class="milestone" style="transform: rotate(90deg) translate(300px) rotate(-90deg);"><span>Wanderlust</span></div>
-        <div class="milestone" style="transform: rotate(120deg) translate(300px) rotate(-120deg);"><span>Citizenship</span></div>
-        <div class="milestone" style="transform: rotate(150deg) translate(300px) rotate(-150deg);"><span>Pet Adoption</span></div>
-        <div class="milestone" style="transform: rotate(180deg) translate(300px) rotate(-180deg);"><span>First Home</span></div>
-        <div class="milestone" style="transform: rotate(210deg) translate(300px) rotate(-210deg);"><span>First Job</span></div>
-        <div class="milestone" style="transform: rotate(240deg) translate(300px) rotate(-240deg);"><span>Creative Release</span></div>
-        <div class="milestone" style="transform: rotate(270deg) translate(300px) rotate(-270deg);"><span>Athletic Achievement</span></div>
-        <div class="milestone" style="transform: rotate(300deg) translate(300px) rotate(-300deg);">
-            <a href="https://simongjewelry.com/collections/wedding-day-jewelry?gad_source=1&gad_campaignid=21671840527&gbraid=0AAAAADy9oU887y4PBiPaD42KgMcm5n1iV&gclid=Cj0KCQjw_rPGBhCbARIsABjq9cetpPo7bVfN9lya2_NJwBk6P9P46wwDo4gbnjrhHBg0MpfhZ6BWmosaApVSEALw_wcB" target="_blank">
-            <span>Wedding</span>
-            </a>
-        </div>
-        <div class="milestone" style="transform: rotate(330deg) translate(300px) rotate(-330deg);"><span>Medical Recovery</span></div>
+        <a class="milestone m0"   href="#"><span>Sobriety</span></a>
+        <a class="milestone m30"  href="#"><span>Passing Exams</span></a>
+        <a class="milestone m60"  href="#"><span>Marathon</span></a>
+        <a class="milestone m90"  href="#"><span>Wanderlust</span></a>
+        <a class="milestone m120" href="#"><span>Citizenship</span></a>
+        <a class="milestone m150" href="#"><span>Pet Adoption</span></a>
+        <a class="milestone m180" href="#"><span>First Home</span></a>
+        <a class="milestone m210" href="#"><span>First Job</span></a>
+        <a class="milestone m240" href="#"><span>Creative Release</span></a>
+        <a class="milestone m270" href="#"><span>Golden Birthday</span></a>
+        <a class="milestone m300" href="https://simongjewelry.com/collections/wedding-day-jewelry?gad_source=1&gad_campaignid=21671840527&gbraid=0AAAAADy9oU887y4PBiPaD42KgMcm5n1iV&gclid=Cj0KCQjw_rPGBhCbARIsABjq9cetpPo7bVfN9lya2_NJwBk6P9P46wwDo4gbnjrhHBg0MpfhZ6BWmosaApVSEALw_wcB" target="_blank" rel="noopener"><span>Wedding</span></a>
+        <a class="milestone m330" href="#"><span>Medical Recovery</span></a>
       </div>
     </div>
   </section>
+
+  <script>
+    // Enable a "hover-like" effect on touch devices
+    (function(){
+      const isTouch = matchMedia('(hover: none), (pointer: coarse)').matches;
+      if (!isTouch) return;
+      document.querySelectorAll('.milestone').forEach(el => {
+        el.addEventListener('touchstart', () => el.classList.add('touch-hover'), {passive:true});
+        const remove = () => el.classList.remove('touch-hover');
+        el.addEventListener('touchend', remove, {passive:true});
+        el.addEventListener('touchcancel', remove, {passive:true});
+        el.addEventListener('touchmove', remove, {passive:true});
+      });
+    })();
+  </script>
 </body>
 </html>
