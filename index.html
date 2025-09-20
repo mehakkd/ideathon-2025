@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simon G - Life's Chapters</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      color: #222;
+      text-align: center;
+      background: #fff;
+    }
+    /* Top header bar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 2rem;
+      border-bottom: 1px solid #eee;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+    }
+    .topbar-left,
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .topbar img.logo {
+      max-height: 80px;
+    }
+    .icon {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    header {
+      padding: 2rem 1rem 1rem 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+    }
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+    }
+    header p {
+      font-size: 1rem;
+      color: #555;
+      letter-spacing: 0.05em;
+    }
+    /* Background section only below header */
+    .background-section {
+      background: url('bg.png') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      padding: 4rem 0;
+    }
+    .background-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(8px);
+      z-index: 0;
+    }
+    .timeline {
+      position: relative;
+      width: 100%;
+      height: 700px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+    .circle {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
+    }
+    .circle h2 {
+      position: absolute;
+      text-align: center;
+      width: 200px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.1rem;
+      color: #444;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+    }
+    .milestone {
+      text-decoration: none;
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .milestone:hover {
+      transform: scale(1.2);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      text-decoration: none;
+    }
+    .milestone span {
+      color: #222;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <!-- Topbar with logo and icons -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>USD$ ▾</span>
+      <i class="fas fa-search icon"></i>
+    </div>
+    <img src="simonglogo.png" alt="Simon G Logo" class="logo" />
+    <div class="topbar-right">
+      <i class="far fa-heart icon"></i>
+      <i class="far fa-user icon"></i>
+      <i class="fas fa-shopping-bag icon"></i>
+    </div>
+  </div>
+
+  <header>
+    <h1>Life’s Chapters</h1>
+    <p>Timeless and elevated jewelry collections designed for every chapter of life’s evolving story.</p>
+  </header>
+
+  <section class="background-section">
+    <div class="timeline">
+      <div class="circle">
+        <h2>Select Your Milestone</h2>
+        <!-- Milestones evenly spaced using inline transform rotation -->
+        <div class="milestone" style="transform: rotate(0deg) translate(300px) rotate(0deg);"><span>Sobriety</span></div>
+        <div class="milestone" style="transform: rotate(30deg) translate(300px) rotate(-30deg);"><span>Passing Exams</span></div>
+        <div class="milestone" style="transform: rotate(60deg) translate(300px) rotate(-60deg);"><span>Marathon</span></div>
+        <div class="milestone" style="transform: rotate(90deg) translate(300px) rotate(-90deg);"><span>Wanderlust</span></div>
+        <div class="milestone" style="transform: rotate(120deg) translate(300px) rotate(-120deg);"><span>Citizenship</span></div>
+        <div class="milestone" style="transform: rotate(150deg) translate(300px) rotate(-150deg);"><span>Pet Adoption</span></div>
+        <div class="milestone" style="transform: rotate(180deg) translate(300px) rotate(-180deg);"><span>First Home</span></div>
+        <div class="milestone" style="transform: rotate(210deg) translate(300px) rotate(-210deg);"><span>First Job</span></div>
+        <div class="milestone" style="transform: rotate(240deg) translate(300px) rotate(-240deg);"><span>Creative Release</span></div>
+        <div class="milestone" style="transform: rotate(270deg) translate(300px) rotate(-270deg);"><span>Golden Birthday</span></div>
+        <div class="milestone" style="transform: rotate(300deg) translate(300px) rotate(-300deg);">
+            <a href="https://simongjewelry.com/collections/wedding-day-jewelry?gad_source=1&gad_campaignid=21671840527&gbraid=0AAAAADy9oU887y4PBiPaD42KgMcm5n1iV&gclid=Cj0KCQjw_rPGBhCbARIsABjq9cetpPo7bVfN9lya2_NJwBk6P9P46wwDo4gbnjrhHBg0MpfhZ6BWmosaApVSEALw_wcB" target="_blank">
+            <span>Wedding</span>
+            </a>
+        </div>
+        <div class="milestone" style="transform: rotate(330deg) translate(300px) rotate(-330deg);"><span>Medical Recovery</span></div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
